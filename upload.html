@@ -31,6 +31,7 @@
   <input type="file" id="examFile" accept=".pdf, image/*">
   <br>
   <button onclick="uploadFile()">העלה קובץ</button>
+  <p id="result"></p>
 
   <script>
     function uploadFile() {
@@ -40,6 +41,11 @@
       if (!file) {
         alert("בחר קובץ קודם!");
         return;
+
+      .then(data => {
+  document.getElementById("result").innerText =
+    "שם הקובץ: " + data.filename + "\nכותרת: " + data.title;
+});
       }
 
       const formData = new FormData();
