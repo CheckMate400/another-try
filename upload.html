@@ -34,36 +34,32 @@
   <p id="result"></p>
 
   <script>
-    function uploadFile() {
-      const fileInput = document.getElementById('examFile');
-      const file = fileInput.files[0];
+  function uploadFile() {
+    const fileInput = document.getElementById('examFile');
+    const file = fileInput.files[0];
 
-      if (!file) {
-        alert("בחר קובץ קודם!");
-        return;
-
-      .then(data => {
-  document.getElementById("result").innerText =
-    "שם הקובץ: " + data.filename + "\nכותרת: " + data.title;
-});
-      }
-
-      const formData = new FormData();
-      formData.append("file", file);
-
-      fetch("http://localhost:8000/upload/", {
-        method: "POST",
-        body: formData
-      })
-      .then(response => response.json())
-      .then(data => {
-        alert("הקובץ הועלה בהצלחה: " + data.filename);
-      })
-      .catch(error => {
-        console.error("שגיאה בהעלאה:", error);
-        alert("שגיאה בהעלאת הקובץ");
-      });
+    if (!file) {
+      alert("בחר קובץ קודם!");
+      return;
     }
-  </script>
+
+    const formData = new FormData();
+    formData.append("file", file);
+
+    fetch("http://localhost:8000/upload/", {
+      method: "POST",
+      body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+      document.getElementById("result").innerText =
+        "שם הקובץ: " + data.filename + "\nכותרת: " + data.title;
+    })
+    .catch(error => {
+      console.error("שגיאה בהעלאה:", error);
+      alert("שגיאה בהעלאת הקובץ");
+    });
+  }
+</script>
 </body>
 </html>
