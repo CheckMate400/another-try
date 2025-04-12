@@ -32,6 +32,8 @@
   <br>
   <button onclick="uploadFile()">העלה קובץ</button>
   <p id="result"></p>
+  <p id="summary"></p>
+
 
   <script>
   function uploadFile() {
@@ -52,13 +54,12 @@
     })
     .then(response => response.json())
     .then(data => {
-      document.getElementById("result").innerText =
-        "שם הקובץ: " + data.filename + "\nכותרת: " + data.title;
-    })
-    .catch(error => {
-      console.error("שגיאה בהעלאה:", error);
-      alert("שגיאה בהעלאת הקובץ");
-    });
+  document.getElementById("result").innerText =
+    "שם הקובץ: " + data.filename + "\nכותרת: " + data.title;
+
+  document.getElementById("summary").innerText =
+    "סיכום: " + data.summary;
+});
   }
 </script>
 </body>
